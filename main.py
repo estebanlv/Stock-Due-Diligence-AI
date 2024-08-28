@@ -2,10 +2,6 @@ import openai
 import yfinance as yf
 import requests
 from bs4 import BeautifulSoup
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import inch
 from dotenv import load_dotenv
 import os
 
