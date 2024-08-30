@@ -12,6 +12,7 @@ def get_technical_data(symbol):
     
     # Extracting various data as specified
     data = {
+        "Info": ticker.info,
         "Calendar": ticker.calendar,
         "SEC Filings": ticker.sec_filings,
         "Income Statement": ticker.income_stmt,
