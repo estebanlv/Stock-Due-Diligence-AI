@@ -86,7 +86,7 @@ Identify the volatility of the stock and potential risks associated with trading
 Provide a clear trading recommendation (e.g., buy, hold, sell) based on your technical analysis, including specific entry and exit points and a rationale for your decision.
 """}
             ],
-            max_tokens=15000  # Adjust token limit based on your use case
+            max_tokens=30000  # Adjust token limit based on your use case
         )
         return response['choices'][0]['message']['content']
     except Exception as e:

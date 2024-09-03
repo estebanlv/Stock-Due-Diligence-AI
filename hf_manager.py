@@ -1,6 +1,7 @@
 import openai
 from dotenv import load_dotenv
 import os
+import json
 
 # Load environment variables from .env file
 load_dotenv()
@@ -17,18 +18,22 @@ def generate_due_diligence(stock, business_dd, technical_dd):
 
 Your task is to generate a comprehensive due diligence report on the stock you are given. This report should merge business due diligence elements with technical due diligence aspects. All of this data will be provided in the prompt from the user. Use the due diligence from the user to create your report. 
 
-Structure the report as follows:
+Structure the report as follows (dont use bullet points, and dont add anything outside this structure) and make sure you send it back in json formatting:
 
-1. Executive Summary
-2. Company Overview
-3. Financial Analysis
-4. Market and Industry Analysis
-5. Technical Price Analysis
-6. Market Sentiment
-7. Volume and Liquidity Analysis
-8. Risk Assessment
-9. Valuation
-10. Recommendations"""},
+{
+  "ticker": "",
+  "due_diligence": {
+    "Executive Summary": "",
+    "Company Overview": "",
+    "Financial Analysis": "",
+    "Technical Price Analysis": "",
+    "Market Sentiment": "",
+    "Volume and Liquidity Analysis": "",
+    "Risk Assessment": "",
+    "Valuation": "",
+    "Recommendations": ""
+  }
+}"""},
 
                 {"role": "user", "content": f"Please create a long and extensive report for the stock {stock}. The business due dilligence is this {business_dd} and the technical due dilligence is this {technical_dd}."}
             ],
@@ -39,6 +44,37 @@ Structure the report as follows:
         return f"Error generating due diligence report: {e}"
     
 
+def extract_json(llm_output):
+    """
+    Extract the JSON content from the LLM output.
+    
+    :param llm_output: str, the raw output from the LLM
+    :return: dict, the extracted JSON content
+    """
+    # Find the start and end of the JSON content
+    start = llm_output.find('{')
+    end = llm_output.rfind('}') + 1
+    
+    if start == -1 or end == 0:
+        raise ValueError("No valid JSON found in the LLM output")
+    
+    # Extract the JSON string
+    json_str = llm_output[start:end]
+    
+    # Parse the JSON string into a Python dictionary
+    try:
+        json_data = json.loads(json_str)
+        return json_data
+    except json.JSONDecodeError:
+        raise ValueError("Invalid JSON format in the LLM output")
+
+# Update the get_hf_due_diligence function
 def get_hf_due_diligence(stock, business_dd, technical_dd):
-    due_diligence = generate_due_diligence(stock, business_dd, technical_dd)
-    return due_diligence
+    raw_due_diligence = generate_due_diligence(stock, business_dd, technical_dd)
+    try:
+        due_diligence_json = extract_json(raw_due_diligence)
+        # Convert the JSON to a formatted string
+        due_diligence_str = json.dumps(due_diligence_json, indent=2)
+        return due_diligence_str
+    except ValueError as e:
+        return str(e)
