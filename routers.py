@@ -8,8 +8,7 @@ import json
 router = APIRouter()
 
 class DueDiligenceResponse(BaseModel):
-    ticker: str
-    due_diligence: dict
+    DD: dict
 
 @router.get("/due_diligence/{ticker}", response_model=DueDiligenceResponse)
 async def get_due_diligence(ticker: str):
@@ -22,6 +21,6 @@ async def get_due_diligence(ticker: str):
         final_dd = get_hf_due_diligence(ticker, business_dd_report, technical_dd_report)
         # Parse the JSON string back into a dictionary
         final_dd_dict = json.loads(final_dd)
-        return DueDiligenceResponse(ticker=ticker, due_diligence=final_dd_dict)
+        return DueDiligenceResponse(DD=final_dd_dict)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating due diligence: {str(e)}")

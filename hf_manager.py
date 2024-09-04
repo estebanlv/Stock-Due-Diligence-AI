@@ -21,7 +21,6 @@ Your task is to generate a comprehensive due diligence report on the stock you a
 Structure the report as follows (dont use bullet points, and dont add anything outside this structure) and make sure you send it back in json formatting:
 
 {
-  "ticker": "",
   "due_diligence": {
     "Executive Summary": "",
     "Company Overview": "",
