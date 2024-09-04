@@ -5,6 +5,9 @@ async function fetchDueDiligence() {
         return;
     }
 
+    const loadingElement = document.getElementById('loading');
+    loadingElement.style.display = 'block'; // Show loading animation
+
     try {
         console.log(`Fetching due diligence for ${ticker}...`);
         const response = await fetch(`http://127.0.0.1:8000/due_diligence/${ticker}`, {
@@ -32,6 +35,8 @@ async function fetchDueDiligence() {
     } catch (error) {
         console.error('Error fetching due diligence:', error);
         alert('Failed to fetch due diligence. Please try again later.');
+    } finally {
+        loadingElement.style.display = 'none'; // Hide loading animation
     }
 }
 
