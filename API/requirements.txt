@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+openai
+pydantic
+httpx
+yfinance
+bs4
+requests
+os
