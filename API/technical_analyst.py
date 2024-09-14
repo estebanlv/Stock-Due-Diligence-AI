@@ -14,7 +14,6 @@ def get_technical_data(symbol):
     data = {
         "Info": ticker.info,
         "Calendar": ticker.calendar,
-        "SEC Filings": ticker.sec_filings,
         "Income Statement": ticker.income_stmt,
         "Quarterly Income Statement": ticker.quarterly_income_stmt,
         "Balance Sheet": ticker.balance_sheet,
@@ -38,7 +37,6 @@ def get_technical_data(symbol):
     for section, content in data.items():
         result += f"--- {section} ---\n"
         result += str(content) + "\n\n"
-    
     return result
 
 
@@ -50,7 +48,6 @@ def generate_due_diligence(symbol):
     :return: str, HTML content of the due diligence report.
     """
     data = get_technical_data(symbol)
-    
     # Replace with your actual OpenAI API key in an .env file
     openai.api_key = os.getenv('OPENAI_API_KEY')
     
@@ -60,7 +57,7 @@ def generate_due_diligence(symbol):
             messages = [
             {"role": "system", "content": "You are a seasoned data analyst specializing in financial decision-making. Your role is to utilize data-driven insights to perform thorough and insightful analyses of financial documents, market conditions, and business operations. Your aim is to assess risks, validate data accuracy, and identify potential opportunities. Leverage your expertise in data analysis, financial modeling, valuation techniques, industry trends, and regulatory compliance to support informed decision-making. Be detail-oriented, objective, and proactive in offering recommendations and highlighting key findings. Your advice should be clear, concise, and grounded in best practices of financial analysis and data interpretation."},
             {"role": "user","content": f"""
-Conduct a comprehensive technical analysis (3000 words) on the following stock: {symbol}. Use the recent news articles provided below for additional context: {data} Please structure your report using the following format, and its very important that you make no bullet points or lists:
+Conduct a comprehensive technical analysis (3000 words) on the following stock: {symbol}. Use the recent data provided below for additional context: {data}. Use the data from the user to create your report, nothing else.  Please structure your report using the following format, and its very important that you make no bullet points or lists:
 
 Technical Analysis Report on {symbol}
 
@@ -68,7 +65,7 @@ Technical Analysis Report on {symbol}
 Provide a high-level overview of the key findings, including potential price trends and trading signals.
 
 2. Stock Overview
-Summarize the company’s stock performance, including its historical price movements, trading volume, and volatility.
+Summarize the companys stock performance, including its historical price movements, trading volume, and volatility.
 
 3. Price Pattern Analysis
 Examine recent price patterns using technical indicators such as moving averages, support and resistance levels, and trend lines. Highlight any notable patterns.
@@ -86,7 +83,7 @@ Identify the volatility of the stock and potential risks associated with trading
 Provide a clear trading recommendation (e.g., buy, hold, sell) based on your technical analysis, including specific entry and exit points and a rationale for your decision.
 """}
             ],
-            max_tokens=30000  # Adjust token limit based on your use case
+            max_tokens=16384  # Adjust token limit based on your use case
         )
         return response['choices'][0]['message']['content']
     except Exception as e:

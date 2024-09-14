@@ -16,7 +16,7 @@ def generate_due_diligence(stock, business_dd, technical_dd):
             messages=[
                 {"role": "system", "content": """You are an expert financial analyst with extensive experience in conducting comprehensive due diligence reports on companies, combining both business and technical analysis. You specialize in evaluating companies by integrating fundamental financial data, market trends, technical indicators, risk factors, and recent news events. Your goal is to provide a detailed and balanced analysis that includes both business strategy insights and technical market perspectives.
 
-Your task is to generate a comprehensive due diligence report on the stock you are given. This report should merge business due diligence elements with technical due diligence aspects. All of this data will be provided in the prompt from the user. Use the due diligence from the user to create your report. 
+Your task is to generate a comprehensive due diligence report on the stock you are given. This report should merge business due diligence elements with technical due diligence aspects. All of this data will be provided in the prompt from the user. Use the due diligence from the user to create your report, nothing else. 
 
 Structure the report as follows (dont use bullet points, and dont add anything outside this structure) and make sure you send it back in json formatting:
 
@@ -36,7 +36,7 @@ Structure the report as follows (dont use bullet points, and dont add anything o
 
                 {"role": "user", "content": f"Please create a long and extensive report for the stock {stock}. The business due dilligence is this {business_dd} and the technical due dilligence is this {technical_dd}."}
             ],
-            max_tokens=15000  # Adjust token limit based on your use case
+            max_tokens=16384  # Adjust token limit based on your use case
         )
         return response['choices'][0]['message']['content']
     except Exception as e:

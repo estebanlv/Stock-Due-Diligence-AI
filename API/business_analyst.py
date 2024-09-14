@@ -62,7 +62,6 @@ def generate_due_diligence(stock):
     :return: str, HTML content of the due diligence report.
     """
     news_details = get_recent_news(stock)
-    
     if not news_details:
         return "No news found for the given stock."
     
@@ -79,7 +78,7 @@ def generate_due_diligence(stock):
             messages=[
                 {"role": "system", "content": "You are a seasoned financial expert specializing in due diligence. Your role is to provide thorough and insightful analysis of financial documents, market conditions, and business operations to assess risks, validate data accuracy, and identify potential opportunities. Use your extensive knowledge in financial modeling, valuation techniques, industry trends, and regulatory compliance to support informed decision-making. Be detail-oriented, objective, and proactive in offering recommendations and highlighting key findings. Your advice should be clear, concise, and grounded in best practices of financial due diligence."},
                 {"role": "user", "content": f"""
-Conduct a comprehensive due diligence analysis (3000 words) on the following stock: {stock}. Use the recent news articles provided below for additional context:
+Conduct a comprehensive due diligence analysis (3000 words) on the following stock: {stock}. Use the recent news articles provided below for additional context. Use the news articles from the user to create your report, nothing else.  :
 
 {news_content}
 
@@ -112,7 +111,7 @@ Offer an estimate of the stock’s intrinsic value using relevant valuation meth
 Provide a clear recommendation (e.g., buy, hold, sell) based on your analysis, including a rationale for your decision.
 """}
             ],
-            max_tokens=15000  # Adjust token limit based on your use case
+            max_tokens=16384  # Adjust token limit based on your use case
         )
         return response['choices'][0]['message']['content']
     except Exception as e:
