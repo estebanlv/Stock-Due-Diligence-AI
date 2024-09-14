@@ -34,7 +34,7 @@ input[type="text"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #007bff; /* Changed background color to blue */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -42,7 +42,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .section {
@@ -52,11 +52,11 @@ button:hover {
     border-radius: 5px;
     cursor: pointer;
     background-color: #333;
+    transition: transform 0.2s; /* Add transition for hover effect */
 }
 
-.section h2 {
-    margin: 0;
-    text-align: center; /* Center the section titles */
+.section:hover {
+    transform: scale(1.05); /* Scale up on hover */
 }
 
 .section-content {

@@ -50,11 +50,20 @@ function displayDueDiligence(dueDiligence) {
         for (let section in dueDiligence) {
             const sectionElement = document.createElement('div');
             sectionElement.className = 'section';
-            sectionElement.innerHTML = `<h2>${section}</h2><div class="section-content">${dueDiligence[section]}</div>`;
-            sectionElement.querySelector('h2').onclick = function () {
-                const content = this.nextElementSibling;
+
+            // Wrap the content in a button
+            sectionElement.innerHTML = `
+                <button class="section-button">
+                    <h2>${section}</h2>
+                    <div class="section-content">${dueDiligence[section]}</div>
+                </button>
+            `;
+
+            sectionElement.querySelector('.section-button').onclick = function () {
+                const content = this.querySelector('.section-content');
                 content.style.display = content.style.display === 'block' ? 'none' : 'block';
             };
+
             sectionsContainer.appendChild(sectionElement);
         }
     } else {
