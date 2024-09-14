@@ -8,7 +8,6 @@ This project provides an API and a web interface for generating due diligence re
 
 - Python 3.7 or higher
 - Node.js (version X.X.X)
-- npm (version X.X.X) or yarn
 
 ## API Setup
 
