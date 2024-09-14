@@ -15,7 +15,6 @@ This project provides an API and a web interface for generating due diligence re
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/estebanlv/stock-due-diligence-ai.git
-   cd stock-due-diligence-ai/API
    ```
 
 2. **Install Dependencies**
@@ -24,10 +23,6 @@ This project provides an API and a web interface for generating due diligence re
    ```
 
 3. **Create a `.env` File**
-   - Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
    - Update the `.env` file with your OpenAI API key and other configurations:
    ```env
    OPENAI_API_KEY=your_openai_api_key_here
@@ -45,19 +40,9 @@ This project provides an API and a web interface for generating due diligence re
    cd ../website
    ```
 
-2. **Install Dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+2. **Open the main.html in your prefered browser**
+<img width="793" alt="image" src="https://github.com/user-attachments/assets/53858963-12d6-4d7f-9ddb-5688e100d6e3">
 
-4. **Run the Website**
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
 
 ## Conclusion
 
