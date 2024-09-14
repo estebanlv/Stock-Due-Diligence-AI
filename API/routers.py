@@ -19,7 +19,6 @@ async def get_due_diligence(ticker: str):
         business_dd_report = get_business_dd(ticker)
         technical_dd_report = get_technical_dd(ticker)
         final_dd = get_hf_due_diligence(ticker, business_dd_report, technical_dd_report)
-        # Parse the JSON string back into a dictionary
         final_dd_dict = json.loads(final_dd)
         return DueDiligenceResponse(DD=final_dd_dict)
     except Exception as e:

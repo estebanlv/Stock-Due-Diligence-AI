@@ -70,7 +70,7 @@ def generate_due_diligence(stock):
     for news in news_details:
         news_content += f"Title: {news['title']}\nContent: {news['content']}\n\n"
     
-    # Replace with your actual OpenAI API key
+    # Replace with your actual OpenAI API key in a .env file
     openai.api_key = os.getenv('OPENAI_API_KEY')
     
     try:

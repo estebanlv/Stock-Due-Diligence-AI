@@ -51,7 +51,7 @@ def generate_due_diligence(symbol):
     """
     data = get_technical_data(symbol)
     
-    # Replace with your actual OpenAI API key
+    # Replace with your actual OpenAI API key in an .env file
     openai.api_key = os.getenv('OPENAI_API_KEY')
     
     try:
@@ -97,6 +97,3 @@ def get_technical_dd(symbol):
     due_diligence = generate_due_diligence(symbol)
     return due_diligence
 
-# Example usage:
-# dd = get_technical_dd("AAPL")
-# print(dd)

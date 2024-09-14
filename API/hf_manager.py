@@ -7,7 +7,7 @@ import json
 load_dotenv()
 
 def generate_due_diligence(stock, business_dd, technical_dd):    
-    # Replace with your actual OpenAI API key
+    # Replace with your actual OpenAI API key in a .env file
     openai.api_key = os.getenv('OPENAI_API_KEY')
     
     try:

@@ -34,7 +34,7 @@ input[type="text"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff; /* Changed background color to blue */
+    background-color: #333;
     color: #fff;
     border: none;
     border-radius: 5px;
