@@ -11,11 +11,12 @@ async function fetchDueDiligence() {
     try {
         console.log(`Fetching due diligence for ${ticker}...`);
         const response = await fetch(`http://127.0.0.1:8000/due_diligence/${ticker}`, {
-            method: 'GET',
+            method: 'POST', // Changed to POST
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ ticker }) // Send ticker in the body
         });
         console.log('Response status:', response.status);
         console.log('Response headers:', response.headers);

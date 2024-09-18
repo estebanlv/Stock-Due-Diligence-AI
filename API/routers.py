@@ -10,7 +10,7 @@ router = APIRouter()
 class DueDiligenceResponse(BaseModel):
     DD: dict
 
-@router.get("/due_diligence/{ticker}", response_model=DueDiligenceResponse)
+@router.post("/due_diligence/{ticker}", response_model=DueDiligenceResponse)
 async def get_due_diligence(ticker: str):
     """
     Generate and return a due diligence report for the given stock ticker.
